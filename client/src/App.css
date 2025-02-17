@@ -1,0 +1,41 @@
+/* 
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+ */
+.sx-react-calendar-wrapper {
+  width: 100%;
+  height: 600px;
+  max-height: 90vh;
+}
+
+/* Uklanjanje plavog okvira kada je Select komponenta fokusirana */
+.react-select__control--is-focused {
+  border-color: #6b7280 !important; /* Siva boja umjesto plave */
+  box-shadow: none !important; /* Uklanjanje plavog sjena */
+}
+
+/* Promjena boje oznake pri hoveru ili selektiranju stavke */
+.react-select__option--is-focused {
+  background-color: #f3f4f6 !important; /* Svijetlo siva boja */
+}
+
+.react-select__option--is-selected {
+  background-color: #e5e7eb !important; /* Siva boja */
+  color: #000 !important; /* Crna boja teksta */
+}
+
+/* Stil za dropdown meni */
+.react-select__menu {
+  border: 2px solid #6b7280; /* Siva granica */
+  border-radius: 8px; /* Zaobljeni kutovi */
+}
+
+/* Stil za placeholder */
+.react-select__placeholder {
+  color: #6b7280; /* Siva boja za placeholder */
+}
