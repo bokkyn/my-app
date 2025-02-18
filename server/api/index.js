@@ -10,7 +10,7 @@ const app = express();
 // ✅ CORS konfiguracija
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "frontendlink", // Stavi pravi URL frontenda
+    origin: process.env.CLIENT_URL || "*", // Stavi pravi URL frontenda
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
