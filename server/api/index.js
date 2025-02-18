@@ -9,11 +9,15 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "https://tenable-croatia.vercel.app", // Stavi pravi URL frontenda
+    origin: process.env.CLIENT_URL || "*", // Stavi pravi URL frontenda
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
 );
+
+app.get("/", (req, res) => {
+  res.send("Server radi!");
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
