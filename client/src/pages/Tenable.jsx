@@ -17,7 +17,7 @@ const Tenable = () => {
   useEffect(() => {
     const fetchPrompt = async () => {
       try {
-        const response = await axios.get("https://tenable-croatia.vercel.app/api/prompts/random");
+        const response = await axios.get("https://tenable-server.vercel.app/api/prompts/random");
         const promptData = response.data;
         console.log("Fetched prompt:", promptData);
         if (!promptData || !promptData.query) {
@@ -28,7 +28,7 @@ const Tenable = () => {
   
         // Fetch players based on the query in the prompt
         const footballersResponse = await axios.post(
-          "https://tenable-croatia.vercel.app/api/footballers/query",
+          "https://tenable-server.vercel.app/api/footballers/query",
           { query: promptData.query }  // Sending the query from the prompt
         );
         const footballersFromPrompt = footballersResponse.data.map((player) => ({
@@ -45,7 +45,7 @@ const Tenable = () => {
   
     const fetchFootballers = async () => {
       try {
-        const response = await axios.get("https://tenable-croatia.vercel.app/api/footballers");
+        const response = await axios.get("hhttps://tenable-server.vercel.app/api/footballers");
         setFootballers(response.data);
       } catch (err) {
         console.error("Pogreška pri dohvaćanju nogometaša:", err);
