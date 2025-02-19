@@ -18,7 +18,7 @@ const Tenable = () => {
     const fetchPrompt = async () => {
       try {
         const response = await axios.get(
-          "https://tenable-server.vercel.app/prompts/today"
+          "https://tenable-server.vercel.app/prompts/random"
         );
         const promptData = response.data;
         console.log("Fetched prompt:", promptData);

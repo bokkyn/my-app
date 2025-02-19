@@ -62,7 +62,7 @@ const Sidebar = () => {
             </li>
             <li className="mb-3">
               <Link
-                to="/"
+                to="/vjezba"
                 className="block p-3 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-lg transition-colors font-medium"
                 onClick={closeSidebar}
               >
