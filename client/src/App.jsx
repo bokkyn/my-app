@@ -4,7 +4,8 @@ import "./styles.css";
 import { Toaster } from "@/components/ui/sonner";
 import OProjektu from "./pages/OProjektu";
 import Tenable from "./pages/Tenable";
-import Sidebar from "./components/Sidebar"; // Import the Sidebar component
+import Sidebar from "./components/Sidebar";
+import Vjezba from "./pages/Vjezba"; // Import the Sidebar component
 
 const App = () => (
   <Router>
