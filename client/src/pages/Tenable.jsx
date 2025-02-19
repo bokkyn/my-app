@@ -18,7 +18,7 @@ const Tenable = () => {
     const fetchPrompt = async () => {
       try {
         const response = await axios.get(
-          "https://tenable-server.vercel.app/api/prompts/random"
+          "https://tenable-server.vercel.app/prompts/random"
         );
         const promptData = response.data;
         console.log("Fetched prompt:", promptData);
@@ -30,7 +30,7 @@ const Tenable = () => {
 
         // Fetch players based on the query in the prompt
         const footballersResponse = await axios.post(
-          "https://tenable-server.vercel.app/api/footballers/query",
+          "https://tenable-server.vercel.app/footballers/query",
           { query: promptData.query } // Sending the query from the prompt
         );
         const footballersFromPrompt = footballersResponse.data.map(
@@ -50,7 +50,7 @@ const Tenable = () => {
     const fetchFootballers = async () => {
       try {
         const response = await axios.get(
-          "https://tenable-server.vercel.app/api/footballers"
+          "https://tenable-server.vercel.app/footballers"
         );
         setFootballers(response.data);
       } catch (err) {
