@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-router.use(cors({ origin: "http://localhost:5173" }));
+router.use(cors());
 
 // -----------------------------------------------------------------------------
 

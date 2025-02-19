@@ -17,24 +17,28 @@ const Tenable = () => {
   useEffect(() => {
     const fetchPrompt = async () => {
       try {
-        const response = await axios.get("https://tenable-server.vercel.app/api/prompts/random");
+        const response = await axios.get(
+          "https://tenable-server.vercel.app/api/prompts/random"
+        );
         const promptData = response.data;
         console.log("Fetched prompt:", promptData);
         if (!promptData || !promptData.query) {
           throw new Error("Nema podataka o promptu.");
         }
-  
+
         setPromptText(promptData.prompt);
-  
+
         // Fetch players based on the query in the prompt
         const footballersResponse = await axios.post(
           "https://tenable-server.vercel.app/api/footballers/query",
-          { query: promptData.query }  // Sending the query from the prompt
+          { query: promptData.query } // Sending the query from the prompt
         );
-        const footballersFromPrompt = footballersResponse.data.map((player) => ({
-          id: `${player.first_name} ${player.last_name}`,
-        }));
-  
+        const footballersFromPrompt = footballersResponse.data.map(
+          (player) => ({
+            id: `${player.first_name} ${player.last_name}`,
+          })
+        );
+
         setTargetFootballers(footballersFromPrompt);
         setGuessed(Array(footballersFromPrompt.length).fill(null));
       } catch (err) {
@@ -42,22 +46,23 @@ const Tenable = () => {
         setError("Nije moguće učitati današnji prompt.");
       }
     };
-  
+
     const fetchFootballers = async () => {
       try {
-        const response = await axios.get("hhttps://tenable-server.vercel.app/api/footballers");
+        const response = await axios.get(
+          "https://tenable-server.vercel.app/api/footballers"
+        );
         setFootballers(response.data);
       } catch (err) {
         console.error("Pogreška pri dohvaćanju nogometaša:", err);
       }
     };
-  
+
     // Fetch prompt and footballers concurrently
     Promise.all([fetchPrompt(), fetchFootballers()]).finally(() =>
       setLoading(false)
     );
   }, []);
-  
 
   useEffect(() => {
     // Update hearts based on the lives left
