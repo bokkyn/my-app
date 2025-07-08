@@ -19,3 +19,6 @@ yarn-error.log*
 *.swp
 Thumbs.db
 .vercel
+
+# Local Netlify folder
+.netlify

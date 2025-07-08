@@ -7,6 +7,7 @@ const promptSchema = new mongoose.Schema({
   prompt: { type: String, required: true },
   query: { type: Array, required: true }, // MongoDB aggregation pipeline
   results: { type: Array, required: true }, // Stores query results
+  club: { type: String, default: null }, // ✅ Dodano
 });
 
 const Prompt = mongoose.model("Prompt", promptSchema, "Prompts");
@@ -21,7 +22,11 @@ router.get("/today", async (req, res) => {
       return res.json(todayPrompt);
     } else {
       const randomPrompt = await Prompt.aggregate([{ $sample: { size: 1 } }]);
-      return res.json(randomPrompt.length ? randomPrompt[0] : { message: "No prompts available." });
+      return res.json(
+        randomPrompt.length
+          ? randomPrompt[0]
+          : { message: "No prompts available." }
+      );
     }
   } catch (error) {
     res.status(500).send(error.message);
@@ -32,7 +37,8 @@ router.get("/today", async (req, res) => {
 router.get("/random", async (req, res) => {
   try {
     const count = await Prompt.countDocuments();
-    if (count === 0) return res.status(404).json({ message: "No prompts available." });
+    if (count === 0)
+      return res.status(404).json({ message: "No prompts available." });
 
     const randomPrompt = await Prompt.aggregate([{ $sample: { size: 1 } }]);
     res.json(randomPrompt[0]);
@@ -44,7 +50,7 @@ router.get("/random", async (req, res) => {
 // ✅ Spremi novi prompt
 router.post("/", async (req, res) => {
   try {
-    const { date, prompt, query } = req.body;
+    const { date, prompt, query, club } = req.body;
 
     if (!date || !prompt || !query) {
       return res.status(400).json({ message: "Missing required fields." });
@@ -52,12 +58,36 @@ router.post("/", async (req, res) => {
 
     const existingPrompt = await Prompt.findOne({ date });
     if (existingPrompt) {
-      return res.status(400).json({ message: "A prompt for this date already exists." });
+      return res
+        .status(400)
+        .json({ message: "A prompt for this date already exists." });
     }
 
-    const newPrompt = new Prompt({ date, prompt, query, results: [] });
+    const newPrompt = new Prompt({
+      date,
+      prompt,
+      query,
+      results: [],
+      club: club || null, // ✅ Dodano
+    });
+
     await newPrompt.save();
     res.status(201).json(newPrompt);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+router.get("/club/:clubName", async (req, res) => {
+  try {
+    const clubName = req.params.clubName;
+    const prompts = await Prompt.find({ club: clubName });
+    if (prompts.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No prompts found for this club." });
+    }
+    res.json(prompts);
   } catch (error) {
     res.status(500).send(error.message);
   }

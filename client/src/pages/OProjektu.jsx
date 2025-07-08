@@ -17,10 +17,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import AutoAd from "../components/AutoAd"; // Import AutoAd component
 
 const OProjektu = () => {
   return (
     <div className="p-6">
+      {/* Auto Ads will be inserted here */}
+      <AutoAd /> {/* PropellerAds will automatically insert banner ads */}
       {/* Tabovi za načine igre */}
       <div className="flex justify-center">
         <Tabs defaultValue="today" className="w-full max-w-[600px]">
@@ -56,7 +59,6 @@ const OProjektu = () => {
           </TabsContent>
         </Tabs>
       </div>
-
       {/* Često postavljana pitanja */}
       <div className="mt-8">
         <h2 className="text-2xl font-bold mb-4 text-center">
