@@ -1,7 +1,7 @@
 [build]
   base="client"
   functions = "netlify/functions"
-  publish = "client/dist" 
+  publish = "dist" 
 
 [[redirects]]
   from = "/api/*"
