@@ -17,9 +17,7 @@ const Tenable = () => {
   useEffect(() => {
     const fetchPrompt = async () => {
       try {
-        const response = await axios.get(
-          "https://tenable-server.vercel.app/prompts/today"
-        );
+        const response = await axios.get("api/prompts/today");
         const promptData = response.data;
         console.log("Fetched prompt:", promptData);
         if (!promptData || !promptData.query) {
@@ -30,7 +28,7 @@ const Tenable = () => {
 
         // Fetch players based on the query in the prompt
         const footballersResponse = await axios.post(
-          "https://tenable-server.vercel.app/footballers/query",
+          "api/footballers/query",
           { query: promptData.query } // Sending the query from the prompt
         );
         const footballersFromPrompt = footballersResponse.data.map(
@@ -49,9 +47,7 @@ const Tenable = () => {
 
     const fetchFootballers = async () => {
       try {
-        const response = await axios.get(
-          "https://tenable-server.vercel.app/footballers"
-        );
+        const response = await axios.get("api/footballers");
         setFootballers(response.data);
       } catch (err) {
         console.error("Pogreška pri dohvaćanju nogometaša:", err);
